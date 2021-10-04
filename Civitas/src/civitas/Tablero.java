@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package civitas;
 
 import java.util.ArrayList;
 
 /**
- *
  * @author valentino
  */
 public class Tablero 
@@ -16,29 +10,42 @@ public class Tablero
     /* ATRIBUTOS:
     *************/
     
+    /* INSTANCIA */
     // - Contenedor de las casillas del juego
-    ArrayList<Casilla> casillas;
+    private ArrayList<Casilla> casillas;
     
     // - Booleano que representa si el jugador que tiene el turno ha pasado por la salida o no en dicho turno
-    boolean porSalida;
+    private boolean porSalida;
     
-    // CONSTRUCTORES
-    // - Constructor con visibilidad de paquetes sin parámetros.
-    Tablero()
-    {
-        this.casillas = new ArrayList<Casilla>();
-        this.casillas.add(new Casilla(TipoCasilla.CALLE, "Salida", 0, 0, 0));
-        this.porSalida = false;
-    }
-
     /* METODOS:
     *************/
     
-    boolean correcto(int numCasilla)
+    /* INSTANCIA */
+    
+    /**
+     * @brief Constructor sin parámetros.
+     */
+    Tablero()
+    {
+        this.casillas = new ArrayList<Casilla>();
+        this.casillas.add(new Casilla(TipoCasilla.DESCANSO, "Salida", 0, 0, 0));
+        this.porSalida = false;
+    }
+
+    /**
+     * @brief Verificar que el índice numCasilla es válido.
+     * @param numCasilla    Índice
+     * @return Verdadero si es un índice válido, Falso en caso contrario.
+     */
+    private boolean correcto(int numCasilla)
     {
         return (numCasilla < this.casillas.size());
     }
     
+    /**
+     * @brief Devuelve el estado del atributo porSalida y luego lo pone a Falso.
+     * @return Atributo porSalida 
+     */
     boolean computarPasoPorSalida()
     {
         boolean estatusActualporSalida = this.porSalida;
@@ -46,12 +53,20 @@ public class Tablero
         return estatusActualporSalida;
     }
     
-    // - Añade la casilla pasada por parámetro.
+    /**
+     * @brief Añade una casilla al tablero.
+     * @param casilla
+     */
     void añadeCasilla(Casilla casilla)
     {
         this.casillas.add(casilla);
     }
     
+    /**
+     * @brief Devuelve la casilla en el índice indicado
+     * @param numCasilla    Índice del tablero
+     * @return Si el indice es correcto, la casilla, en caso contrario, null.
+     */
     Casilla getCasilla(int numCasilla)
     {
         if (correcto(numCasilla))
@@ -64,6 +79,12 @@ public class Tablero
         }
     }
     
+    /**
+     * @brief Calcula la nueva posición en el tablero
+     * @param actual Posición actual
+     * @param tirada Resultado de una tirada
+     * @return Nueva posición
+     */
     int nuevaPosicion(int actual, int tirada)
     {
         int newPos = (actual + tirada) % casillas.size(); 
@@ -74,5 +95,10 @@ public class Tablero
         }
         
         return newPos;
+    }
+    
+    int getNumCasillas()
+    {
+        return this.casillas.size();
     }
 }
