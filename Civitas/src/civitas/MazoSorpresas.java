@@ -5,29 +5,23 @@ import java.util.Collections;
 
 /**
  *
- * @author valentino
+ * @author Lugli, Valentino Glauco
  */
 public class MazoSorpresas 
 {
-    /* ATRIBUTOS:
-    *************/
-    
-    /* INSTANCIA */
-    
-    // - Almacenar las cartas Sorpresa
+    /* Atributos */
+
+    // Almacenar las cartas Sorpresa
     private ArrayList<Sorpresa> sorpresas;
-    // - Indica si se ha barajado o no el mazo.
+    // Indica si se ha barajado o no el mazo.
     private boolean barajada;
-    // - Cuenta el número de cartas del mazo que han sido barajadas.
+    // Cuenta el número de cartas del mazo que han sido barajadas.
     private int usadas;
-    // - Permite activar o desactivar el modo debug.
+    // Permite activar o desactivar el modo debug.
     private boolean debug;
         
-    /* METODOS:
-    *************/
-    
-    /* INSTANCIA */
- 
+    /* Métodos */
+     
     /**
      * @brief Inicializa por defecto el estado del Mazo.
      */

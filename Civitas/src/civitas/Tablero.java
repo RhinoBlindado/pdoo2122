@@ -7,20 +7,15 @@ import java.util.ArrayList;
  */
 public class Tablero 
 {
-    /* ATRIBUTOS:
-    *************/
-    
-    /* INSTANCIA */
+    /* Atributos */
+
     // - Contenedor de las casillas del juego
     private ArrayList<Casilla> casillas;
     
     // - Booleano que representa si el jugador que tiene el turno ha pasado por la salida o no en dicho turno
     private boolean porSalida;
     
-    /* METODOS:
-    *************/
-    
-    /* INSTANCIA */
+    /* Metodos */
     
     /**
      * @brief Constructor sin parámetros.
@@ -39,14 +34,14 @@ public class Tablero
      */
     private boolean correcto(int numCasilla)
     {
-        return (numCasilla < this.casillas.size());
+        return (0 <= numCasilla && numCasilla < this.casillas.size());
     }
     
     /**
      * @brief Devuelve el estado del atributo porSalida y luego lo pone a Falso.
      * @return Atributo porSalida 
      */
-    boolean computarPasoPorSalida()
+    boolean computarPorSalida()
     {
         boolean estatusActualporSalida = this.porSalida;
         this.porSalida = false;
@@ -67,7 +62,7 @@ public class Tablero
      * @param numCasilla    Índice del tablero
      * @return Si el indice es correcto, la casilla, en caso contrario, null.
      */
-    Casilla getCasilla(int numCasilla)
+    public Casilla getCasilla(int numCasilla)
     {
         if (correcto(numCasilla))
         {
@@ -77,6 +72,14 @@ public class Tablero
         {
            return null; 
         }
+    }
+    
+    /**
+     * @return Devuelve la lista de casillas del tablero.
+     */
+    public ArrayList<Casilla> getCasillas()
+    {
+        return this.casillas;
     }
     
     /**
@@ -97,6 +100,7 @@ public class Tablero
         return newPos;
     }
     
+    // [?] No aparece en UML, ¿Se borra?
     int getNumCasillas()
     {
         return this.casillas.size();

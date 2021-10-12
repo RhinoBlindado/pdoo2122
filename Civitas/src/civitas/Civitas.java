@@ -4,18 +4,18 @@ import java.util.ArrayList;
 
 /*
  * [CASTELLANO]
- * Civitas - Practica 1
+ * Civitas
  * Asignatura: Programación y Diseño Orientado a Objetos
  * Autor: Valentino Lugli (Github: @RhinoBlindado)
- * Fecha: Septiempre 2021
+ * Fecha: Septiempre 2021 - Diciembre 2021
  */
 
 /*
  * [ENGLISH]
- * Civitas - Practice 1
+ * Civitas
  * Course: Object Oriented Programming and Design
  * Author: Valentino Lugli (Github: @RhinoBlindado)
- * Date: September 2021
+ * Date: September 2021 - December 2021
  */
 public class Civitas {
 
@@ -124,6 +124,13 @@ public class Civitas {
             else
                 System.out.println(" - Posicion: "+ i +": Vacio");
         }
+        
+        tempCell = board.getCasilla(-1);
+        
+        if (tempCell != null)
+            System.out.println(" - Posicion: -1 :"+tempCell.toString());
+        else
+            System.out.println(" - Posicion: -1" +": Vacio");
         
         /*
          * 6. Crea algunos bucles sobre la totalidad de las calles para calcular y mostrar cuál es la calle
