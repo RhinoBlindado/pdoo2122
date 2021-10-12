@@ -9,7 +9,7 @@ public class Habitacion
     private int numero;
     private int capacidad;
     
-    
+    // [?] ¿Navegabilidad? ¿Debería tener un atributo Hotel?
     public Habitacion(int numero, int capacidad)
     {
         this.numero = numero;
