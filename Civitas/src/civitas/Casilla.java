@@ -12,9 +12,9 @@ public class Casilla
 
     // Constantes
     // - Constantes para el precio del alquiler total.
-    private final float  FACTORALQUILERCALLE = 1.0f;
-    private final float  FACTORALQUILERCASA = 1.0f;
-    private final float  FACTORALQUILERHOTEL = 4.0f;
+    private static float  FACTORALQUILERCALLE = 1.0f;
+    private static float  FACTORALQUILERCASA = 1.0f;
+    private static float  FACTORALQUILERHOTEL = 4.0f;
     
     // Indica que clase de casilla es la instancia.
     private TipoCasilla tipo;
@@ -211,10 +211,19 @@ public class Casilla
         return this.propietario == jugador;
     }
     
-    // WIP
+    /**
+     * @brief Informa al diario del jugador que ha caido en la casilla actual.
+     * @param iactual Indice de la lista de jugadores.
+     * @param todos   Lista de todos los jugadores.
+     */
     void informe(int iactual, ArrayList<Jugador> todos)
     {
-        
+        if(0 <= iactual && iactual < todos.size())
+        {
+            Jugador temp = todos.get(iactual);
+            String evento =("Casilla: " + temp.getNombre()+" ha caido en " + this.toString());
+            Diario.getInstance().ocurreEvento(evento);
+        }
     }
     
     // WIP hasta P3

@@ -93,7 +93,7 @@ public class Civitas {
 
         System.out.println(" - TipoCasilla: " + TipoCasilla.CALLE + ", " + TipoCasilla.DESCANSO);
         System.out.println(" - TipoSorpresa: " + TipoSorpresa.PAGARCOBRAR + ", " + TipoSorpresa.PORCASAHOTEL);
-        System.out.println(" - EstadosJuego: " + EstadosJuego.INICIO_TURNO);
+        System.out.println(" - EstadosJuego: " + EstadoJuego.INICIO_TURNO);
 
 
         /*

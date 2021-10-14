@@ -18,7 +18,7 @@ public class Tablero
     /* Metodos */
     
     /**
-     * @brief Constructor sin parámetros.
+     * Constructor sin parámetros.
      */
     Tablero()
     {
@@ -28,7 +28,7 @@ public class Tablero
     }
 
     /**
-     * @brief Verificar que el índice numCasilla es válido.
+     * Verificar que el índice numCasilla es válido.
      * @param numCasilla    Índice
      * @return Verdadero si es un índice válido, Falso en caso contrario.
      */
@@ -38,7 +38,7 @@ public class Tablero
     }
     
     /**
-     * @brief Devuelve el estado del atributo porSalida y luego lo pone a Falso.
+     * Devuelve el estado del atributo porSalida y luego lo pone a Falso.
      * @return Atributo porSalida 
      */
     boolean computarPorSalida()
@@ -49,7 +49,7 @@ public class Tablero
     }
     
     /**
-     * @brief Añade una casilla al tablero.
+     * Añade una casilla al tablero.
      * @param casilla
      */
     void añadeCasilla(Casilla casilla)
@@ -58,7 +58,7 @@ public class Tablero
     }
     
     /**
-     * @brief Devuelve la casilla en el índice indicado
+     * Devuelve la casilla en el índice indicado
      * @param numCasilla    Índice del tablero
      * @return Si el indice es correcto, la casilla, en caso contrario, null.
      */
@@ -83,7 +83,7 @@ public class Tablero
     }
     
     /**
-     * @brief Calcula la nueva posición en el tablero
+     * Calcula la nueva posición en el tablero
      * @param actual Posición actual
      * @param tirada Resultado de una tirada
      * @return Nueva posición

@@ -16,17 +16,17 @@ public class Jugador implements Comparable<Jugador>
     /* Atributos */
     
     // Constantes
-    protected final int CasasMax = 4;
-    protected final int CasasPorHotel = 4;
-    protected final int HotelesMax = 4;
-    protected final float PasoPorSalida = 1000;
-    
+    protected static int CasasMax = 4;
+    protected static int CasasPorHotel = 4;
+    protected static int HotelesMax = 4;
+    protected static float PasoPorSalida = 1000;
+    private final float SaldoInicial = 7500;
+
     // De instancia
-    int casillaActual;
-    String nombre;
-    boolean puedeComprar;
-    float saldo;
-    final float SaldoInicial = 7500;
+    private int casillaActual;
+    private String nombre;
+    private boolean puedeComprar;
+    private float saldo;
     
     ArrayList<Casilla> propiedades;
     
@@ -49,174 +49,305 @@ public class Jugador implements Comparable<Jugador>
         this.puedeComprar = otro.puedeComprar;
         this.saldo = otro.saldo;
     }
-    
-    // WIP
+
+    /**
+     * 
+     * @return 
+     */
     int cantidadCasasHoteles()
     {
+        int total = 0;
         
+        for(int i=0; i<this.propiedades.size(); i++)
+        {
+            total += this.propiedades.get(i).cantidadCasasHoteles();
+        }
+        return total;
     }
     
-    // WIP
+    /**
+     * 
+     * @param otro
+     * @return 
+     */
     @Override
     public int compareTo(Jugador otro)
     {
+        int comparator = 0;
+        
+        if(this.saldo > otro.saldo)
+        {
+            comparator = 1;
+        }
+        
+        if(this.saldo < otro.saldo)
+        {
+            comparator = -1;
+        }
+        
         return 0;
     }
     
-    // WIP
+    // WIP hasta P3
     boolean comprar(Casilla titulo)
     {
-        
+        return true;
     }
     
-    // WIP
+    // WIP hasta P3
     boolean construirCasa(int ip)
     {
-        
+        return true;
     }
     
-    // WIP
+    // WIP hasta P3
     boolean construirHotel(int ip)
     {
-        
+        return true;
     }
     
-    // WIP
+    /**
+     * @return true si el saldo del jugador es negativo, falso en caso contrario. 
+     */
     boolean enBancarrota()
     {
-        
+        return this.saldo < 0;
     }
     
-    // WIP
+    /**
+     * @brief Comprueba que la proiedad existe
+     * @param ip    Índice de la propiedad
+     * @return true si el índice se encuentra dentro de la lista de propiedades, false en caso contrario.
+     */
     private boolean existeLaPropiedad(int ip)
     {
-        
+        boolean doesExist = false;
+        if(0<= ip && ip < this.propiedades.size())
+        {
+            doesExist = true;
+        }
+        return doesExist;
     }
     
-    // WIP
+    /**
+     * @return  Retorna la cantidad máxima de casas.
+     */
     private int getCasasMax()
     {
-        
+        return this.CasasMax;
     }
     
-    // WIP
+    /**
+     * 
+     * @return Retorna las casas que se tienen que derruir para construir un hotel.
+     */
     int getCasasPorHotel()
     {
-        
+        return this.CasasPorHotel;
     }
     
-    // WIP
+    /**
+     * @return Retorna la casilla actual donde está el jugador.
+     */
     int getCasillaActual()
     {
-        
+        return this.casillaActual;
     }
     
-    // WIP
+    /**
+     * @return Retorna la cantidad máxima de hoteles.
+     */
     private int getHotelesMax()
     {
-        
+        return this.HotelesMax;
     }
     
-    // WIP
+    /**
+     * @return Retorna el nombre del Jugador.
+     */
     protected String getNombre()
     {
-        
+        return this.nombre;
     }
     
-    // WIP
+    /**
+     * 
+     * @return 
+     */
     private float getPremioPasoPorSalida()
     {
-        
+        return this.PasoPorSalida;
     }
     
-    // WIP
+    /**
+     * @return Devuelve la lista de propiedades del Jugador.
+     */
     protected ArrayList<Casilla> getPropiedades()
     {
-        
+        return this.propiedades;
     }
     
-    // WIP
+    /**
+     * 
+     * @return 
+     */
     boolean getPuedeComprar()
     {
-        
+        return this.puedeComprar;
     }
     
-    // WIP
+    /**
+     * 
+     * @return 
+     */
     protected float getSaldo()
     {
-        
+        return this.saldo;
     }
     
-    // WIP
-    boolean modificarSaldo(float cantidad)
+    /**
+     * @param cantidad
+     * @return 
+     */
+    boolean modificaSaldo(float cantidad)
     {
+        Diario.getInstance().ocurreEvento("Jugador "+this.nombre +": Saldo "+ this.saldo +" -> " + (this.saldo + cantidad));
+        this.saldo += cantidad;
         
+        return true;
     }
     
-    // WIP
+    /**
+     * @param numCasilla
+     * @return 
+     */
     boolean moverACasilla(int numCasilla)
     {
+        Diario.getInstance().ocurreEvento("Jugador " + this.nombre + ": Casilla " + this.casillaActual + " -> " + numCasilla);
+        this.casillaActual = numCasilla;
+        this.puedeComprar = false;
         
+        return true;
     }
     
-    // WIP
+    /**
+     * @brief Realiza un pago a un jugador y se reduce la cantidad de saldo.
+     * @param cantidad Valor a pagar
+     * @return Siempre retorna true.
+     */
     boolean paga(float cantidad)
     {
-        
+        return (modificaSaldo(cantidad * -1));
     }
     
-    // WIP
+    /**
+     * 
+     * @param cantidad
+     * @return 
+     */
     boolean pagaAlquiler(float cantidad)
     {
-        
+        return(paga(cantidad));
     }
     
-    // WIP
+    /**
+     * @brief Se recibe el premio de pasar por la salida, se suma al saldo actual.
+     * @return Siempre devuelve true
+     */
     boolean pasaPorSalida()
     {
-        
+        Diario.getInstance().ocurreEvento("Jugador "+this.nombre+": Paso por salida");
+        recibe(getPremioPasoPorSalida());
+        return true;
     }
     
-    // WIP
+    /**
+     * @return Devuelve el valor anterior del metodo puedeComprar y lo pone a true.
+     */
     boolean puedeComprarCasilla()
     {
+        boolean prevValue = this.puedeComprar;
+        this.puedeComprar = true;
         
+        return prevValue;
     }
     
-    // WIP
+    /**
+     * @brief Indica si se puede edificar una casa en la casilla.
+     * @param propiedad Casilla donde se quiere edificar una casa.
+     * @return 
+     */
     private boolean puedoEdificarCasa(Casilla propiedad)
     {
+        boolean canBuild = false;
         
+        float housePrice = propiedad.getPrecioEdificar();
+        int numHouses = propiedad.getNumCasas();
+        
+        if(puedoGastar(housePrice) && numHouses < getCasasMax())
+        {
+            canBuild = true;
+        }
+        
+        return canBuild;
     }
     
-    // WIP
+    /**
+     * @brief Indica si se puede edificar un hotel en la casilla.
+     * @param propiedad Casilla donde se quiere edificar un hotel.
+     * @return true si se cumplen las condiciones necesarias: tiene el dinero suficiente, no ha superado el numero de hoteles y tiene la cantidad de casas necesarias, falso en caso contrario.
+     */
     private boolean puedoEdificarHotel(Casilla propiedad)
     {
+        boolean canBuild = false;
         
+        float hotelPrice = propiedad.getPrecioEdificar();
+        int numHouses = propiedad.getNumCasas();
+        int numHotels = propiedad.getNumHoteles();
+        
+        if(puedoGastar(hotelPrice) && numHotels < getHotelesMax() && numHouses >= getCasasPorHotel())
+        {
+            canBuild = true;
+        }
+        
+        return canBuild;
     }
     
-    // WIP
+    /**
+     * @brief Indica si se puede afrontar el precio
+     * @param precio    
+     * @return true si el saldo es mayor o igual que el precio, false en caso contrario.
+     */
     private boolean puedoGastar(float precio)
     {
-        
+        return (this.saldo >= precio);
     }
     
-    // WIP
+    /**
+     * @param cantidad
+     * @return 
+     */
     boolean recibe(float cantidad)
     {
-        
+        return (modificaSaldo(cantidad));
     }
     
-    // WIP
+    /**
+     * @return true si tiene propiedades, false en caso contrario.
+     */
     boolean tieneAlgoQueGestionar()
     {
-        
+        return (!this.propiedades.isEmpty());
     }
     
-    // WIP
-    String toString()
+    /**
+     * 
+     * @return 
+     */
+    @Override
+    public String toString()
     {
-        
+        return ("Jugador: (Nombre: "+this.nombre+", Casilla Act: "+this.casillaActual+", ¿Puede comprar? "+this.puedeComprar+" Saldo: "+this.saldo);
     }
     
 }
