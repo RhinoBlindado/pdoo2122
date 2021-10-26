@@ -23,7 +23,7 @@ public class Tablero
     Tablero()
     {
         this.casillas = new ArrayList<Casilla>();
-        this.casillas.add(new Casilla(TipoCasilla.DESCANSO, "Salida", 0, 0, 0));
+        this.casillas.add(new Casilla(TipoCasilla.DESCANSO, "SALIDA"));
         this.porSalida = false;
     }
 

@@ -75,7 +75,7 @@ public class Casilla
     }
     
     /**
-     * @brief Constructor para casillas tipo DESCANSO
+     * Constructor para casillas tipo DESCANSO
      * @param tipo      Tipo de casilla.
      * @param nombre    Nombre de la casilla.
      */
@@ -88,7 +88,7 @@ public class Casilla
     }
     
     /**
-     * @brief Constructor para casillas tipo SORPRESA
+     * Constructor para casillas tipo SORPRESA
      * @param tipo      Tipo de casilla.
      * @param nombre    Nombre de la casilla.
      * @param mazo      Objeto de tipo MazoSorpresas
@@ -100,6 +100,7 @@ public class Casilla
         this.tipo = tipo;
         this.Nombre = nombre;
         this.mazo = mazo;
+        this.sorpresa = null;
     }
     
     /**
@@ -110,7 +111,7 @@ public class Casilla
         return this.numCasas + this.numHoteles;
     }
     
-    /** [?] No aparece en UML; ¡se borra?
+    /** [?] No aparece en UML; ¿se borra?
      * @return Nombre de la casilla.
      */
     String getNombre()
@@ -221,7 +222,7 @@ public class Casilla
         if(0 <= iactual && iactual < todos.size())
         {
             Jugador temp = todos.get(iactual);
-            String evento =("Casilla: " + temp.getNombre()+" ha caido en " + this.toString());
+            String evento = ("Casilla: " + temp.getNombre()+" ha caido en " + this.toString());
             Diario.getInstance().ocurreEvento(evento);
         }
     }
@@ -285,16 +286,30 @@ public class Casilla
         switch(this.tipo)
         {
             case CALLE:
-                info = ("Casilla CALLE (Propietario: " + this.propietario.getNombre() +", Nombre: " + this.Nombre + ", Precio Compra: " + this.precioCompra + ", Precio Base Alquiler: " + this.precioBaseAlquiler
+                info = ("Casilla CALLE (Propietario: ");
+                if(this.propietario != null)
+                    info += this.propietario.getNombre();
+                else
+                    info += ("Sin Propietario");
+                
+                info +=(", Nombre: " + this.Nombre + ", Precio Compra: " + this.precioCompra + ", Precio Base Alquiler: " + this.precioBaseAlquiler
                 + ", Nº Casas: " + this.numCasas + ", Nº Hoteles: "+ this.numHoteles + ")");
             break;
             
-            case SORPRESA:
-                info = ("Casilla SORPRESA (Nombre: "+ this.Nombre +" ");
+            case DESCANSO:
+                info = ("Casilla DESCANSO (Nombre: "+ this.Nombre +")");
             break;
             
-            case DESCANSO:
-                info = ("Casilla DESCANSO (Nombre: "+ this.Nombre + ", "+ this.sorpresa.toString() + ")");
+            case SORPRESA:
+                info = ("Casilla SORPRESA (Nombre: "+ this.Nombre + ", ");
+                if(this.sorpresa != null)
+                {
+                    info += (this.sorpresa.toString() + ")");
+                }
+                else
+                {
+                    info += ("Sin Sopresa Asignada)");
+                }
             break;
         }
         
