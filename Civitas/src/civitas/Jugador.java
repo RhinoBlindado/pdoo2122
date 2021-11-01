@@ -28,7 +28,7 @@ public class Jugador implements Comparable<Jugador>
     private boolean puedeComprar;
     private float saldo;
     
-    ArrayList<Casilla> propiedades;
+    ArrayList<Casilla> propiedades = new ArrayList<>();
     
     /* Metodos */
     
@@ -38,7 +38,7 @@ public class Jugador implements Comparable<Jugador>
         
         this.casillaActual = 0;
         this.puedeComprar = false;
-        this.saldo = 0;
+        this.saldo = SaldoInicial;
     }
     
     protected Jugador(Jugador otro)
@@ -88,22 +88,87 @@ public class Jugador implements Comparable<Jugador>
         return 0;
     }
     
-    // WIP hasta P3
     boolean comprar(Casilla titulo)
     {
-        return true;
+        boolean result = false;
+        
+        if(this.puedeComprar)
+        {
+            // 1
+            float precio = titulo.getPrecioCompra();
+            
+            if(this.puedoGastar(precio))
+            {
+                // 2
+                result = titulo.comprar(this);
+                
+                // 3
+                this.propiedades.add(titulo);
+                
+                // 4
+                Diario.getInstance().ocurreEvento("El jugador "+this.nombre+ " compra la propiedad "+titulo.getNombre());
+                
+                // 5 
+                this.puedeComprar = false;
+            }
+        }
+        else
+        {
+            // 6
+            Diario.getInstance().ocurreEvento("El jugador "+this.nombre+" no saldo para comprar la propiedad "+titulo.getNombre());
+        }
+        return result;
     }
     
-    // WIP hasta P3
     boolean construirCasa(int ip)
     {
-        return true;
+        // 1
+        boolean result = false;
+        // 2
+        boolean existe = this.existeLaPropiedad(ip);
+        
+        if(existe)
+        {
+            // 3
+            Casilla propiedad = this.propiedades.get(ip);
+            
+            // 4
+            if(this.puedoEdificarCasa(propiedad))
+            {
+                // 5
+                result = propiedad.construirCasa(this);
+                
+                // 6
+                Diario.getInstance().ocurreEvento("El jugador " + this.nombre + " construye una casa en la propiedad " + propiedad.getNombre() + " ("+ip+")");
+            }
+        }
+        return result;
     }
     
-    // WIP hasta P3
     boolean construirHotel(int ip)
     {
-        return true;
+        boolean result = false;
+        
+        if(this.existeLaPropiedad(ip))
+        {
+            // 1
+            Casilla propiedad = this.propiedades.get(ip);
+            
+            // 2
+            if(this.puedoEdificarHotel(propiedad))
+            {
+                // 3
+                result = propiedad.construirHotel(this);
+                
+                // 4
+                propiedad.derruirCasas(this.getCasasPorHotel(), this);
+                
+                // 5
+                Diario.getInstance().ocurreEvento("El jugador " + this.nombre + " construye hotel en la propiedad " + propiedad.getNombre() +" (" + ip + ")");
+            }
+        }
+        
+        return result;
     }
     
     /**
@@ -266,10 +331,9 @@ public class Jugador implements Comparable<Jugador>
      */
     boolean puedeComprarCasilla()
     {
-        boolean prevValue = this.puedeComprar;
         this.puedeComprar = true;
         
-        return prevValue;
+        return this.puedeComprar;
     }
     
     /**

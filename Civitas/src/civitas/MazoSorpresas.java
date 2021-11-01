@@ -89,10 +89,12 @@ public class MazoSorpresas
         
         this.usadas++;
         
+        System.out.println("Estoy aqui");
         Sorpresa sorpresaActual = this.sorpresas.get(0);
         this.sorpresas.add(sorpresaActual);
         this.sorpresas.remove(0);
-        
+        System.out.println("Luego: "+sorpresaActual.toString());
+
         return sorpresaActual;
     }
 }

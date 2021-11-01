@@ -4,7 +4,7 @@ package civitas;
  *
  * @author Lugli, Valentino Glauco
  */
-enum OperacionJuego 
+public enum OperacionJuego 
 {
     PASAR_TURNO,
     AVANZAR,

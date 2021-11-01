@@ -164,17 +164,19 @@ public class Casilla
         return (FACTORALQUILERCALLE * this.precioBaseAlquiler) * (FACTORALQUILERCASA + numCasas + (numHoteles * FACTORALQUILERHOTEL));
     }
     
-    // WIP hasta P3
     boolean construirCasa(Jugador jugador)
     {
         this.numCasas++;
         return true;
     }
     
-    // WIP hasta P3
     boolean construirHotel(Jugador jugador)
     {
+        // 3.1
+        this.propietario.paga( this.precioEdificar );
+        // 3.2
         this.numHoteles++;
+        // 3.3
         return true;
     }
 
@@ -227,22 +229,49 @@ public class Casilla
         }
     }
     
-    // WIP hasta P3
     void recibeJugador(int iactual, ArrayList<Jugador> todos)
     {
-        
+        switch(this.tipo)
+        {
+            case CALLE:
+                this.recibeJugador_calle(iactual, todos);
+            break;
+            
+            case SORPRESA:
+                this.recibeJugador_sorpresa(iactual, todos);
+            break;
+            
+            case DESCANSO:
+                this.informe(iactual, todos);
+            break;
+        }
     }
     
-    // WIP hasta P3
     private void recibeJugador_calle(int iactual, ArrayList<Jugador> todos)
     {
+        this.informe(iactual, todos);
+        Jugador jugador = todos.get(iactual);
         
+        if(!this.tienePropietario())
+        {
+            jugador.puedeComprarCasilla();
+        }
+        else
+        {
+            this.tramitarAlquiler(jugador);
+        }
     }
     
-    // WIP hasta P3
     private void recibeJugador_sorpresa(int iactual, ArrayList<Jugador> todos)
     {
+        // 1
+        this.sorpresa = this.mazo.siguiente();
         
+        // 2
+        this.informe(iactual, todos);
+        
+        // 3
+        this.sorpresa.aplicarAJugador(iactual, todos);
     }
     
     /**
@@ -316,10 +345,13 @@ public class Casilla
         return info;
     }
     
-    // WIP hasta P3
     boolean comprar(Jugador jugador)
     {
-        return true;
+        // 2.1
+        this.propietario = jugador;
+        
+        // 2.2
+        return this.propietario.paga(precioCompra);
     }
     
 }
