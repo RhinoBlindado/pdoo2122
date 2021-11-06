@@ -27,7 +27,7 @@ public class MazoSorpresas
      */
     private void init()
     {
-        this.sorpresas = new ArrayList<Sorpresa>();
+        this.sorpresas = new ArrayList<>();
         this.barajada = false;
         this.usadas = 0;
     }
@@ -43,7 +43,7 @@ public class MazoSorpresas
 
         if(debug)
         {
-            Diario.getInstance().ocurreEvento("MazoSorpresas: Debug activado");
+            Diario.getInstance().ocurreEvento("[MazoSorpresas]: Debug activado");
         }
     }
     
@@ -79,6 +79,7 @@ public class MazoSorpresas
             
             this.usadas = 0;
             this.barajada = true;
+            Diario.getInstance().ocurreEvento("Mazo Barajado");
         }
         
         /*
@@ -89,11 +90,10 @@ public class MazoSorpresas
         
         this.usadas++;
         
-        System.out.println("Estoy aqui");
         Sorpresa sorpresaActual = this.sorpresas.get(0);
+
         this.sorpresas.add(sorpresaActual);
         this.sorpresas.remove(0);
-        System.out.println("Luego: "+sorpresaActual.toString());
 
         return sorpresaActual;
     }

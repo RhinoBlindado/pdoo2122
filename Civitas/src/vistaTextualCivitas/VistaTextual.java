@@ -64,9 +64,13 @@ public class VistaTextual implements Vista {
       System.out.println (tab+i+"-"+lista.get(i));
     }
 
-    opcion = leeEntero(lista.size(),
-                          "\n"+tab+"Elige una opción: ",
-                          tab+"Valor erróneo");
+    opcion = leeEntero
+        (
+            lista.size(),
+            "\n"+tab+"Elige una opción: ",
+            tab+"Valor erróneo"
+        );
+    
     return opcion;
   }
   
@@ -76,8 +80,9 @@ public class VistaTextual implements Vista {
     System.out.println(VistaTextual.separador);
     if(!this.juegoModel.finalDelJuego())
     {
+        System.out.println("Jugador actual: ");
         System.out.println(juegoModel.getJugadorActual().toString());
-        // de la casilla actual. ????   
+        System.out.println("Casilla actual: ");
         System.out.println(juegoModel.getCasillaActual().toString());
     }
     else
@@ -114,42 +119,40 @@ public class VistaTextual implements Vista {
   @Override
   public  int elegirPropiedad()
   {
-      Jugador playa = this.juegoModel.getJugadorActual();
-      
-      return 0;
+    Jugador player = this.juegoModel.getJugadorActual();
+    ArrayList<Casilla> properties = this.juegoModel.getPropiedadesJugadorAct();
+    String title = ">>>¿Que propiedad quieres gestionar?";
+    ArrayList<String> ansTitle = new ArrayList<>();
+
+    for (int i=0; i<properties.size(); i++) 
+    {
+        ansTitle.add(properties.get(i).toString());
+    }
+    
+    return menu(title,ansTitle);
   }
 
   @Override
   public OperacionInmobiliaria elegirOperacion()
   {
       
-      String title = ">>>¿Quieres comprar esta calle?";
-      String ansTitle = "0 - Construir una casa. \n1 - Construir un hotel. \n2 - Terminar de gestionar esta calle. \n>";
-      String ansErr = "¡No es una opción correcta! Vuelve a intentar.";
+      String title = ">>>¿Qué quieres hacer?";
+      ArrayList<String> ansTitle = new ArrayList<>(Arrays.asList
+      (
+                "Construir una casa.",
+                "Construir un hotel", 
+                "Terminar de gestionar y pasar turno."
+      ));
       
-      System.out.println(title);
-      return OperacionInmobiliaria.values()[leeEntero
-        (
-                OperacionInmobiliaria.values().length, 
-                ansTitle, 
-                ansErr
-        )];
+      return OperacionInmobiliaria.values()[menu(title, ansTitle)];
   }
   
   @Override
   public Respuesta comprar()
   {
-      int ansLen = 2;
       String title = ">>>¿Quieres comprar esta calle?";
-      String ansTitle = "0 - NO \n1 - SI\n>";
-      String ansErr = "¡No es una opción correcta! Vuelve a intentar.";
+      ArrayList<String> ansTitle = new ArrayList<>(Arrays.asList("NO", "SI"));
       
-      System.out.println(title);
-      return Respuesta.values()[leeEntero
-        (
-              ansLen,
-              ansTitle,
-              ansErr
-        )];
+      return Respuesta.values()[menu(title, ansTitle)];
   }
 }

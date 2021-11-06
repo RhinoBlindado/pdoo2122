@@ -75,24 +75,29 @@ public class Jugador implements Comparable<Jugador>
     {
         int comparator = 0;
         
-        if(this.saldo > otro.saldo)
+        if(this.saldo < otro.saldo)
         {
             comparator = 1;
         }
         
-        if(this.saldo < otro.saldo)
+        if(this.saldo > otro.saldo)
         {
             comparator = -1;
         }
         
-        return 0;
+        return comparator;
     }
     
+    /**
+     * Comprar una propiedad 
+     * @param titulo    La propiedad a comprar
+     * @return true si se compra la propiedad, false en caso contrario.
+     */
     boolean comprar(Casilla titulo)
     {
         boolean result = false;
         
-        if(this.puedeComprar)
+        if(this.getPuedeComprar())
         {
             // 1
             float precio = titulo.getPrecioCompra();
@@ -111,15 +116,21 @@ public class Jugador implements Comparable<Jugador>
                 // 5 
                 this.puedeComprar = false;
             }
-        }
-        else
-        {
-            // 6
-            Diario.getInstance().ocurreEvento("El jugador "+this.nombre+" no saldo para comprar la propiedad "+titulo.getNombre());
+            else
+            {
+                // 6
+                Diario.getInstance().ocurreEvento("El jugador "+this.nombre+" no tiene saldo para comprar la propiedad "+titulo.getNombre());
+            }
         }
         return result;
     }
     
+    /**
+     * Construye una casa en una propiedad
+     * @see Practica 3, /docs/P3_diagramas.pdf
+     * @param ip    Número de propiedad
+     * @return true si se construye una casa, false en caso contrario.
+     */
     boolean construirCasa(int ip)
     {
         // 1
@@ -139,12 +150,24 @@ public class Jugador implements Comparable<Jugador>
                 result = propiedad.construirCasa(this);
                 
                 // 6
-                Diario.getInstance().ocurreEvento("El jugador " + this.nombre + " construye una casa en la propiedad " + propiedad.getNombre() + " ("+ip+")");
+                Diario.getInstance().ocurreEvento("El jugador " + this.nombre + " construye una casa en " + propiedad.getNombre() + " ("+ip+")");
             }
+            else
+            {
+                // No aparece en UML, pero se añade para informar.
+                Diario.getInstance().ocurreEvento("El jugador " + this.nombre + " no puede construir una casa en " + propiedad.getNombre() + " ("+ip+")");
+            }
+
         }
         return result;
     }
     
+    /**
+     * Construye un hotel en una propiedad.
+     * @see Practica 3, /docs/P3_diagramas.pdf
+     * @param ip    Número de la propiedad.
+     * @return true si se construye un hotel, falso en caso contrario.
+     */
     boolean construirHotel(int ip)
     {
         boolean result = false;
@@ -166,6 +189,12 @@ public class Jugador implements Comparable<Jugador>
                 // 5
                 Diario.getInstance().ocurreEvento("El jugador " + this.nombre + " construye hotel en la propiedad " + propiedad.getNombre() +" (" + ip + ")");
             }
+            else
+            {
+                // No aparece en UML, añadida para dar más información-
+                Diario.getInstance().ocurreEvento("El jugador " + this.nombre + " no puede construir hotel en la propiedad " + propiedad.getNombre() +" (" + ip + ")");
+            }
+            
         }
         
         return result;
@@ -180,7 +209,7 @@ public class Jugador implements Comparable<Jugador>
     }
     
     /**
-     * @brief Comprueba que la proiedad existe
+     * @brief Comprueba que la propiedad existe
      * @param ip    Índice de la propiedad
      * @return true si el índice se encuentra dentro de la lista de propiedades, false en caso contrario.
      */
@@ -247,7 +276,7 @@ public class Jugador implements Comparable<Jugador>
     /**
      * @return Devuelve la lista de propiedades del Jugador.
      */
-    protected ArrayList<Casilla> getPropiedades()
+    ArrayList<Casilla> getPropiedades()
     {
         return this.propiedades;
     }
@@ -276,7 +305,7 @@ public class Jugador implements Comparable<Jugador>
      */
     boolean modificaSaldo(float cantidad)
     {
-        Diario.getInstance().ocurreEvento("Jugador "+this.nombre +": Saldo "+ this.saldo +" -> " + (this.saldo + cantidad));
+        Diario.getInstance().ocurreEvento("[Jugador] "+this.nombre +": Saldo "+ this.saldo +" + (" + cantidad + ") = " + (this.saldo + cantidad));
         this.saldo += cantidad;
         
         return true;
@@ -288,7 +317,7 @@ public class Jugador implements Comparable<Jugador>
      */
     boolean moverACasilla(int numCasilla)
     {
-        Diario.getInstance().ocurreEvento("Jugador " + this.nombre + ": Casilla " + this.casillaActual + " -> " + numCasilla);
+        Diario.getInstance().ocurreEvento("[Jugador] " + this.nombre + ": Casilla [" + this.casillaActual + "] ->  [" + numCasilla+"]");
         this.casillaActual = numCasilla;
         this.puedeComprar = false;
         
@@ -302,7 +331,8 @@ public class Jugador implements Comparable<Jugador>
      */
     boolean paga(float cantidad)
     {
-        return (modificaSaldo(cantidad * -1));
+        this.modificaSaldo(cantidad * -1);
+        return true;
     }
     
     /**
@@ -321,25 +351,27 @@ public class Jugador implements Comparable<Jugador>
      */
     boolean pasaPorSalida()
     {
-        Diario.getInstance().ocurreEvento("Jugador "+this.nombre+": Paso por salida");
+        Diario.getInstance().ocurreEvento("[Jugador] "+this.nombre+": Paso por salida");
         recibe(getPremioPasoPorSalida());
         return true;
     }
     
     /**
-     * @return Devuelve el valor anterior del metodo puedeComprar y lo pone a true.
+     * Indica al jugador que puede comprar la casilla
+     * @return Siempre devuelve true
      */
     boolean puedeComprarCasilla()
     {
+        // Fija el atributo puedeComprar a true...
         this.puedeComprar = true;
-        
+        // ...y devuelve el valor de este atributo.
         return this.puedeComprar;
     }
     
     /**
      * @brief Indica si se puede edificar una casa en la casilla.
      * @param propiedad Casilla donde se quiere edificar una casa.
-     * @return 
+     * @return true si se puede, false en caso contrario.
      */
     private boolean puedoEdificarCasa(Casilla propiedad)
     {
@@ -411,7 +443,14 @@ public class Jugador implements Comparable<Jugador>
     @Override
     public String toString()
     {
-        return ("Jugador: (Nombre: "+this.nombre+", Casilla Act: "+this.casillaActual+", ¿Puede comprar? "+this.puedeComprar+" Saldo: "+this.saldo);
+        String canBuy;
+        
+        if(this.puedeComprar)
+            canBuy = "Sí";
+        else
+            canBuy = "No";
+        
+        return ("Nombre: "+this.nombre+", Casilla actual: "+this.casillaActual+", ¿Puede comprar? "+ canBuy +", Saldo: "+this.saldo+"€");
     }
     
 }

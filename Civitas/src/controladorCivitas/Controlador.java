@@ -21,6 +21,10 @@ public class Controlador
         this.vista = vista;
     }
     
+    /**
+     * Método base donde se ejecuta el juego
+     * @see Práctica 3, /docs/P3-guion.pdf
+     */
     public void juega()
     {
         OperacionJuego currOp;
@@ -85,6 +89,11 @@ public class Controlador
                         this.juego.siguientePasoCompletado(currOp);
                     }
                 }
+            }
+            else
+            {
+                // Se llama cuando ha finalizado el juego para mostrar el ranking.
+                this.vista.actualiza();
             }
 
         }

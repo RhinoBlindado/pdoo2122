@@ -13,21 +13,14 @@ import java.util.Random;
  */
 public class Dado 
 {
-    /* ATRIBUTOS:
-    *************/
     
-    /* INSTANCIA */
     private Random random = new Random();
     private int ultimoResultado;
     private boolean debug;
     
-    /* CLASE */
     static final private Dado instance = new Dado();
     
-    /* METODOS:
-    *************/
     
-    /* INSTANCIA */
     /**
      * @brief Constructor sin parámetros.
      */
@@ -54,6 +47,8 @@ public class Dado
             result = random.nextInt(6) + 1;
         }
         
+        Diario.getInstance().ocurreEvento("[Dado] Tirada ["+result+"]");
+
         this.ultimoResultado = result;
         
         return result;
@@ -78,14 +73,15 @@ public class Dado
         Diario di = Diario.getInstance();
         
         if (d)
-            di.ocurreEvento("Dado: Debug activado");
+            di.ocurreEvento("[Dado] Debug activado");
         else
-            di.ocurreEvento("Dado: Debug desactivado");
+            di.ocurreEvento("[Dado] Debug desactivado");
 
         this.debug = d;
     }
     
     /**
+     * @see Practica 1
      * @return Ultimo resultado de la tirada del dado.
      */
     int getUltimoResultado()
@@ -93,7 +89,6 @@ public class Dado
         return this.ultimoResultado;
     }
     
-    /* CLASE */
     /**
      * @return Instancia de la clase Dado.
      */

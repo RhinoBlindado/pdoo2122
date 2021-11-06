@@ -166,14 +166,18 @@ public class Casilla
     
     boolean construirCasa(Jugador jugador)
     {
+        //5.1 
+        this.propietario.paga(precioEdificar);
+        //5.2
         this.numCasas++;
+        //5.3
         return true;
     }
     
     boolean construirHotel(Jugador jugador)
     {
         // 3.1
-        this.propietario.paga( this.precioEdificar );
+        this.propietario.paga(this.precioEdificar);
         // 3.2
         this.numHoteles++;
         // 3.3
@@ -224,7 +228,7 @@ public class Casilla
         if(0 <= iactual && iactual < todos.size())
         {
             Jugador temp = todos.get(iactual);
-            String evento = ("Casilla: " + temp.getNombre()+" ha caido en " + this.toString());
+            String evento = ("[Casilla] " + temp.getNombre()+" ha caido en " + this.Nombre);
             Diario.getInstance().ocurreEvento(evento);
         }
     }
@@ -315,36 +319,33 @@ public class Casilla
         switch(this.tipo)
         {
             case CALLE:
-                info = ("Casilla CALLE (Propietario: ");
+                info = ("CALLE (Propietario: ");
                 if(this.propietario != null)
                     info += this.propietario.getNombre();
                 else
-                    info += ("Sin Propietario");
+                    info += ("N/A");
                 
-                info +=(", Nombre: " + this.Nombre + ", Precio Compra: " + this.precioCompra + ", Precio Base Alquiler: " + this.precioBaseAlquiler
-                + ", Nº Casas: " + this.numCasas + ", Nº Hoteles: "+ this.numHoteles + ")");
+                info +=(", Nombre: " + this.Nombre + ", Precio: " + this.precioCompra + "€, Edificar: "+ this.precioEdificar +"€, Base alquiler: " + this.precioBaseAlquiler
+                + "€, Casas: " + this.numCasas + ", Hoteles: "+ this.numHoteles + ")");
             break;
             
             case DESCANSO:
-                info = ("Casilla DESCANSO (Nombre: "+ this.Nombre +")");
+                info = ("DESCANSO ("+ this.Nombre +")");
             break;
             
             case SORPRESA:
-                info = ("Casilla SORPRESA (Nombre: "+ this.Nombre + ", ");
-                if(this.sorpresa != null)
-                {
-                    info += (this.sorpresa.toString() + ")");
-                }
-                else
-                {
-                    info += ("Sin Sopresa Asignada)");
-                }
+                info = ("SORPRESA ("+ this.Nombre + ")");
             break;
         }
         
         return info;
     }
     
+    /**
+     * La casilla es comprada por el jugador.
+     * @param jugador   Jugador que será propietario.
+     * @return Siempre devuelve true.
+     */
     boolean comprar(Jugador jugador)
     {
         // 2.1

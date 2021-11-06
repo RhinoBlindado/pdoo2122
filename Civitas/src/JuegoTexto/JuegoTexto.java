@@ -21,7 +21,7 @@ public class JuegoTexto
             "Big Boss"
         ));
 
-        CivitasJuego civitas = new CivitasJuego(players, true);
+        CivitasJuego civitas = new CivitasJuego(players, false);
         VistaTextual frontend = new VistaTextual(civitas);
         Controlador gameMaster = new Controlador(civitas, frontend);
         gameMaster.juega();

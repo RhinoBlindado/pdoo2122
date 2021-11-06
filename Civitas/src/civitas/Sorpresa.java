@@ -64,7 +64,7 @@ public class Sorpresa
         if(0 <= iactual && iactual < todos.size())
         {
             Jugador temp = todos.get(iactual);
-            String evento = ("Sorpesa: Jugador" + temp.getNombre()+" se le aplica" + this.toString());
+            String evento = ("[Sorpesa]: Jugador" + temp.getNombre()+" se le aplica " + this.toString());
             Diario.getInstance().ocurreEvento(evento);
         }
     }

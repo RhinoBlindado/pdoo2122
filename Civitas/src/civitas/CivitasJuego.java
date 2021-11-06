@@ -45,21 +45,22 @@ public class CivitasJuego
     {
         ArrayList<Casilla> tokens = new ArrayList<>(Arrays.asList
         (
-            new Casilla(TipoCasilla.CALLE, "Avenida Andrés Eloy Blanco", 7500, 250, 750),
-            new Casilla(TipoCasilla.CALLE, "Avenida San José de Tarbes", 1337, 666, 777),
+                                         // Nombre, Precio Compra, Edificar, Alquiler
+            new Casilla(TipoCasilla.CALLE, "Avenida Andrés Eloy Blanco", 7501, 250, 99990),
+            new Casilla(TipoCasilla.CALLE, "Avenida San José de Tarbes", 6000, 666, 777),
             new Casilla(TipoCasilla.SORPRESA, "Sorpresa #1", mazo),
-            new Casilla(TipoCasilla.CALLE, "Avenida Salvador Feo La Cruz", 1492, 1010, 1212),
+            new Casilla(TipoCasilla.CALLE, "Avenida Salvador Feo La Cruz", 192, 1010, 1212),
             new Casilla(TipoCasilla.CALLE, "Avenida 106", 1000, 500, 300),
-            new Casilla(TipoCasilla.CALLE, "Callejón Mañongo", 25000, 300, 500),
+            new Casilla(TipoCasilla.CALLE, "Callejón Mañongo", 2500, 300, 500),
             new Casilla(TipoCasilla.SORPRESA, "Sorpresa #2", mazo),
             new Casilla(TipoCasilla.CALLE, "Avenida Universidad", 1825, 3000, 2),
-            new Casilla(TipoCasilla.CALLE, "Avenida Bolívar", 45000, 4000, 1500),
+            new Casilla(TipoCasilla.CALLE, "Avenida Bolívar", 4500, 4000, 1500),
             new Casilla(TipoCasilla.DESCANSO, "Estacionamiento Prebo"),
-            new Casilla(TipoCasilla.CALLE, "Las 4 Avenidas", 5000, 1250, 2000),
+            new Casilla(TipoCasilla.CALLE, "Las 4 Avenidas", 500, 1250, 2000),
             new Casilla(TipoCasilla.CALLE, "Avenida Río Orinoco", 250, 3000, 780),
             new Casilla(TipoCasilla.SORPRESA, "Sorpresa #3", mazo),
             new Casilla(TipoCasilla.CALLE, "Calle 137", 100, 50, 1000),
-            new Casilla(TipoCasilla.CALLE, "Avenida Carlos Sanda", 6969, 420, 111),
+            new Casilla(TipoCasilla.CALLE, "Avenida Carlos Sanda", 699, 420, 111),
             new Casilla(TipoCasilla.CALLE, "Avenida Principal Guayabal", 1, 2, 3),
             new Casilla(TipoCasilla.SORPRESA, "Sorpresa #4", mazo),
             new Casilla(TipoCasilla.CALLE, "Avenida Don Julio Centeno", 1234, 4567, 7890),
@@ -84,7 +85,7 @@ public class CivitasJuego
             new Sorpresa(TipoSorpresa.PAGARCOBRAR, "Una moneda de 1€ se te va volando al cielo", -1),
             new Sorpresa(TipoSorpresa.PAGARCOBRAR, "Ves todo rojo y pierdes 666€", -666),
             new Sorpresa(TipoSorpresa.PAGARCOBRAR, "Alguien te pide sin consentimiento 10000€", -10000),
-            /* 4 PORCASAHOTEL, 2 positivas y 2 negativas*/
+            /* 4 PORCASAHOTEL, 2 positivas y 2 negativas */
             new Sorpresa(TipoSorpresa.PORCASAHOTEL, "Cobra por cada casa y hotel 200€", 200),
             new Sorpresa(TipoSorpresa.PORCASAHOTEL, "Cobra por cada casa y hotel 1000€", 1000),
             new Sorpresa(TipoSorpresa.PORCASAHOTEL, "Paga por cada casa y hotel 420€", -420),
@@ -102,6 +103,21 @@ public class CivitasJuego
         return this.jugadores.get(this.indiceJugadorActual);
     }
     
+    /**
+     * Obtiene la lista de propiedades del Jugador Actual
+     * ! Metodo no en UML, pero se necesita para la vista: el jugador debe de poder indicar en que calle quiere gestionar propiedades.
+     * @return Lista de Casillas que son propiedad del jugador actual.
+     */
+    public ArrayList<Casilla> getPropiedadesJugadorAct()
+    {
+        return this.jugadores.get(this.indiceJugadorActual).getPropiedades();
+    }
+    
+    /**
+     * Obtiene la casilla donde se encuentra el jugador actual.
+     * ! Metodo no en UML, pero se necesita para la vista: indicar los detalles de la casilla actual donde está el jugador.
+     * @return 
+     */
     public Casilla getCasillaActual()
     {
         return this.tablero.getCasilla(this.getJugadorActual().getCasillaActual());
@@ -131,6 +147,7 @@ public class CivitasJuego
             if(this.jugadores.get(i).enBancarrota())
             {
                 isBankrupt = true;
+                this.ranking();
                 break;
             }
         }
@@ -148,11 +165,14 @@ public class CivitasJuego
         return this.jugadores.get(this.indiceJugadorActual).construirHotel(ip);
     }    
     
+    /**
+     * Ordena los jugadores por cantidad de dinero
+     * @return Lista ordenada de los jugadores por cantidad de dinero.
+     */
     private ArrayList<Jugador> ranking()
     {
-        ArrayList<Jugador> gamerRanking = new ArrayList<>(this.jugadores);
-        Collections.sort(gamerRanking);
-        return gamerRanking;
+        Collections.sort(this.jugadores);
+        return this.jugadores;
     }
     
     private void contabilizarPasosPorSalida(Jugador jugadorActual)
@@ -202,7 +222,6 @@ public class CivitasJuego
         // 2 y 3
         Casilla casilla = this.tablero.getCasilla(jugadorActual.getCasillaActual());
         // 4
-        System.out.println("tf");
         return jugadorActual.comprar(casilla);
     }
     
