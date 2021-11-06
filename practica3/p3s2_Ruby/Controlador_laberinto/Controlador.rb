@@ -2,11 +2,6 @@
 
 module Controlador_laberinto
 
-  require_relative '../modelo_laberinto/laberinto'
-  require_relative '../modelo_laberinto/habitacion'
-  require_relative '../modelo_laberinto/direccion'
-  require_relative 'Estado_juego'
-
   class Controlador
 
     attr_reader :habitacion_usuario, :vidas, :estado
