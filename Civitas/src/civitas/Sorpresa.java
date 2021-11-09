@@ -52,6 +52,7 @@ public class Sorpresa
     {
         Jugador act = todos.get(actual);
         act.modificaSaldo(this.valor * act.cantidadCasasHoteles());
+        informe(actual, todos);
     }
     
     /**
@@ -64,7 +65,7 @@ public class Sorpresa
         if(0 <= iactual && iactual < todos.size())
         {
             Jugador temp = todos.get(iactual);
-            String evento = ("[Sorpesa]: Jugador" + temp.getNombre()+" se le aplica " + this.toString());
+            String evento = ("[Sorpesa] " + temp.getNombre()+" se le aplica " + this.toString());
             Diario.getInstance().ocurreEvento(evento);
         }
     }
@@ -87,6 +88,6 @@ public class Sorpresa
      */
     public String toString()
     {
-        return ("Sorpresa (Texto: "+this.texto+")");
+        return ("["+this.texto+"]");
     }
 }

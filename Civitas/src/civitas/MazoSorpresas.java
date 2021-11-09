@@ -79,7 +79,6 @@ public class MazoSorpresas
             
             this.usadas = 0;
             this.barajada = true;
-            Diario.getInstance().ocurreEvento("Mazo Barajado");
         }
         
         /*

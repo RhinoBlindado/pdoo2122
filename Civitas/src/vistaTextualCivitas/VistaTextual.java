@@ -77,18 +77,18 @@ public class VistaTextual implements Vista {
   @Override
   public void actualiza()
   {
-    System.out.println(VistaTextual.separador);
+    System.out.println("\n" + VistaTextual.separador);
     if(!this.juegoModel.finalDelJuego())
     {
-        System.out.println("Jugador actual: ");
-        System.out.println(juegoModel.getJugadorActual().toString());
-        System.out.println("Casilla actual: ");
-        System.out.println(juegoModel.getCasillaActual().toString());
+        System.out.println(">>>Jugador actual: ");
+        System.out.println("\t"+juegoModel.getJugadorActual().toString());
+        System.out.println(">>>Casilla actual: ");
+        System.out.println("\t"+juegoModel.getCasillaActual().toString());
     }
     else
     {
-        System.out.println("¡Fin del juego!");
-        System.out.println("Ranking de los jugadores:");
+        System.out.println(">>>¡Fin del juego!");
+        System.out.println(">>>Ranking de los jugadores:");
         ArrayList<Jugador> players = this.juegoModel.getJugadores();
         
         for(int i=0; i<players.size(); i++)
@@ -103,7 +103,7 @@ public class VistaTextual implements Vista {
   @Override
   public void mostrarEventos()
   {
-      System.out.println(" - Eventos:");
+      System.out.println(">>>Eventos:");
       while(Diario.getInstance().eventosPendientes())
       {
         System.out.println("\t"+Diario.getInstance().leerEvento());
@@ -113,7 +113,7 @@ public class VistaTextual implements Vista {
   @Override
   public void mostrarSiguienteOperacion(OperacionJuego operacion)
   {
-      System.out.println(" - La siguiente operación va a ser: " + operacion);
+      System.out.println(">>>La siguiente operación va a ser: " + operacion);
   }
   
   @Override

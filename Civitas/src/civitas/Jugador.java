@@ -111,7 +111,7 @@ public class Jugador implements Comparable<Jugador>
                 this.propiedades.add(titulo);
                 
                 // 4
-                Diario.getInstance().ocurreEvento("El jugador "+this.nombre+ " compra la propiedad "+titulo.getNombre());
+                Diario.getInstance().ocurreEvento("[Jugador] "+this.nombre+ " compra la propiedad "+titulo.getNombre());
                 
                 // 5 
                 this.puedeComprar = false;
@@ -119,7 +119,7 @@ public class Jugador implements Comparable<Jugador>
             else
             {
                 // 6
-                Diario.getInstance().ocurreEvento("El jugador "+this.nombre+" no tiene saldo para comprar la propiedad "+titulo.getNombre());
+                Diario.getInstance().ocurreEvento("[Jugador] "+this.nombre+" no tiene saldo para comprar la propiedad "+titulo.getNombre());
             }
         }
         return result;
@@ -150,12 +150,12 @@ public class Jugador implements Comparable<Jugador>
                 result = propiedad.construirCasa(this);
                 
                 // 6
-                Diario.getInstance().ocurreEvento("El jugador " + this.nombre + " construye una casa en " + propiedad.getNombre() + " ("+ip+")");
+                Diario.getInstance().ocurreEvento("[Jugador] " + this.nombre + " construye una casa en " + propiedad.getNombre() + " ("+ip+")");
             }
             else
             {
                 // No aparece en UML, pero se añade para informar.
-                Diario.getInstance().ocurreEvento("El jugador " + this.nombre + " no puede construir una casa en " + propiedad.getNombre() + " ("+ip+")");
+                Diario.getInstance().ocurreEvento("[Jugador] " + this.nombre + " no puede construir una casa en " + propiedad.getNombre() + " ("+ip+")");
             }
 
         }
@@ -187,12 +187,12 @@ public class Jugador implements Comparable<Jugador>
                 propiedad.derruirCasas(this.getCasasPorHotel(), this);
                 
                 // 5
-                Diario.getInstance().ocurreEvento("El jugador " + this.nombre + " construye hotel en la propiedad " + propiedad.getNombre() +" (" + ip + ")");
+                Diario.getInstance().ocurreEvento("[Jugador] " + this.nombre + " construye hotel en la propiedad " + propiedad.getNombre() +" (" + ip + ")");
             }
             else
             {
                 // No aparece en UML, añadida para dar más información-
-                Diario.getInstance().ocurreEvento("El jugador " + this.nombre + " no puede construir hotel en la propiedad " + propiedad.getNombre() +" (" + ip + ")");
+                Diario.getInstance().ocurreEvento("[Jugador] " + this.nombre + " no puede construir hotel en la propiedad " + propiedad.getNombre() +" (" + ip + ")");
             }
             
         }
@@ -450,7 +450,7 @@ public class Jugador implements Comparable<Jugador>
         else
             canBuy = "No";
         
-        return ("Nombre: "+this.nombre+", Casilla actual: "+this.casillaActual+", ¿Puede comprar? "+ canBuy +", Saldo: "+this.saldo+"€");
+        return ("Nombre: "+this.nombre+", Casilla actual: "+this.casillaActual+", ¿Puede intentar comprar? "+ canBuy +", Saldo: "+this.saldo+"€");
     }
     
 }

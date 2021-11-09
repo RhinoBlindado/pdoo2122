@@ -147,6 +147,10 @@ public class CivitasJuego
             if(this.jugadores.get(i).enBancarrota())
             {
                 isBankrupt = true;
+                /*
+                 * No se especifica pero como se sabe que al final del juego se 
+                 * tienen que ordenar los jugadores, tiene sentido esto.
+                 */ 
                 this.ranking();
                 break;
             }

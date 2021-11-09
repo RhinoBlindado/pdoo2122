@@ -47,7 +47,7 @@ public class Dado
             result = random.nextInt(6) + 1;
         }
         
-        Diario.getInstance().ocurreEvento("[Dado] Tirada ["+result+"]");
+     //   Diario.getInstance().ocurreEvento("[Dado] Tirada ["+result+"]");
 
         this.ultimoResultado = result;
         
