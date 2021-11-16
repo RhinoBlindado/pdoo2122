@@ -46,7 +46,7 @@ public class CivitasJuego
         ArrayList<Casilla> tokens = new ArrayList<>(Arrays.asList
         (
                                          // Nombre, Precio Compra, Edificar, Alquiler
-            new Casilla(TipoCasilla.CALLE, "Avenida Andrés Eloy Blanco", 7501, 250, 99990),
+            new Casilla(TipoCasilla.CALLE, "Avenida Andrés Eloy Blanco", 400, 250, 999),
             new Casilla(TipoCasilla.CALLE, "Avenida San José de Tarbes", 6000, 666, 777),
             new Casilla(TipoCasilla.SORPRESA, "Sorpresa #1", mazo),
             new Casilla(TipoCasilla.CALLE, "Avenida Salvador Feo La Cruz", 192, 1010, 1212),
