@@ -1,6 +1,7 @@
 package vistaTextualCivitas;
 
 import civitas.Casilla;
+import civitas.CasillaCalle;
 import civitas.CivitasJuego;
 import civitas.Diario;
 import civitas.OperacionJuego;
@@ -120,7 +121,7 @@ public class VistaTextual implements Vista {
   public  int elegirPropiedad()
   {
     Jugador player = this.juegoModel.getJugadorActual();
-    ArrayList<Casilla> properties = this.juegoModel.getPropiedadesJugadorAct();
+    ArrayList<CasillaCalle> properties = this.juegoModel.getPropiedadesJugadorAct();
     String title = ">>>¿Que propiedad quieres gestionar?";
     ArrayList<String> ansTitle = new ArrayList<>();
 

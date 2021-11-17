@@ -14,6 +14,16 @@ public class CasillaCalle extends Casilla
         super(nombre);
     }
     
+    /* 2
+    boolean recibeJugador()
+    {
+        System.out.println("Soy una casilla calle y recibo un jugador");
+        return true;
+    }
+    */
+
+    // 3
+    // Reutilizando código del padre.
     @Override
     boolean recibeJugador()
     {
@@ -28,7 +38,7 @@ public class CasillaCalle extends Casilla
         }
         
     }
-    
+ 
     void construirCasa()
     {
         this.numCasas++;

@@ -1,3 +1,19 @@
+/*
+ * [CASTELLANO]
+ * Civitas
+ * Asignatura: Programación y Diseño Orientado a Objetos
+ * Autor: Valentino Lugli (Github: @RhinoBlindado)
+ * Fecha: Septiempre 2021 - Diciembre 2021
+ */
+
+/*
+ * [ENGLISH]
+ * Civitas
+ * Course: Object Oriented Programming and Design
+ * Author: Valentino Lugli (Github: @RhinoBlindado)
+ * Date: September 2021 - December 2021
+ */
+
 package civitas;
 
 import java.util.ArrayList;
@@ -46,25 +62,25 @@ public class CivitasJuego
         ArrayList<Casilla> tokens = new ArrayList<>(Arrays.asList
         (
                                          // Nombre, Precio Compra, Edificar, Alquiler
-            new Casilla(TipoCasilla.CALLE, "Avenida Andrés Eloy Blanco", 400, 250, 999),
-            new Casilla(TipoCasilla.CALLE, "Avenida San José de Tarbes", 6000, 666, 777),
-            new Casilla(TipoCasilla.SORPRESA, "Sorpresa #1", mazo),
-            new Casilla(TipoCasilla.CALLE, "Avenida Salvador Feo La Cruz", 192, 1010, 1212),
-            new Casilla(TipoCasilla.CALLE, "Avenida 106", 1000, 500, 300),
-            new Casilla(TipoCasilla.CALLE, "Callejón Mañongo", 2500, 300, 500),
-            new Casilla(TipoCasilla.SORPRESA, "Sorpresa #2", mazo),
-            new Casilla(TipoCasilla.CALLE, "Avenida Universidad", 1825, 3000, 2),
-            new Casilla(TipoCasilla.CALLE, "Avenida Bolívar", 4500, 4000, 1500),
-            new Casilla(TipoCasilla.DESCANSO, "Estacionamiento Prebo"),
-            new Casilla(TipoCasilla.CALLE, "Las 4 Avenidas", 500, 1250, 2000),
-            new Casilla(TipoCasilla.CALLE, "Avenida Río Orinoco", 250, 3000, 780),
-            new Casilla(TipoCasilla.SORPRESA, "Sorpresa #3", mazo),
-            new Casilla(TipoCasilla.CALLE, "Calle 137", 100, 50, 1000),
-            new Casilla(TipoCasilla.CALLE, "Avenida Carlos Sanda", 699, 420, 111),
-            new Casilla(TipoCasilla.CALLE, "Avenida Principal Guayabal", 1, 2, 3),
-            new Casilla(TipoCasilla.SORPRESA, "Sorpresa #4", mazo),
-            new Casilla(TipoCasilla.CALLE, "Avenida Don Julio Centeno", 1234, 4567, 7890),
-            new Casilla(TipoCasilla.CALLE, "Avenida Este-Oeste 2", 2000, 1420, 3240)
+            new CasillaCalle("Avenida Andrés Eloy Blanco", 400, 250, 999),
+            new CasillaCalle("Avenida San José de Tarbes", 6000, 666, 777),
+            new CasillaSorpresa("Sorpresa #1", mazo),
+            new CasillaCalle("Avenida Salvador Feo La Cruz", 192, 1010, 1212),
+            new CasillaCalle("Avenida 106", 1000, 500, 300),
+            new CasillaCalle("Callejón Mañongo", 2500, 300, 500),
+            new CasillaSorpresa("Sorpresa #2", mazo),
+            new CasillaCalle("Avenida Universidad", 1825, 3000, 2),
+            new CasillaCalle("Avenida Bolívar", 4500, 4000, 1500),
+            new Casilla("Estacionamiento Prebo"),
+            new CasillaCalle("Las 4 Avenidas", 500, 1250, 2000),
+            new CasillaCalle("Avenida Río Orinoco", 250, 3000, 780),
+            new CasillaSorpresa("Sorpresa #3", mazo),
+            new CasillaCalle("Calle 137", 100, 50, 1000),
+            new CasillaCalle("Avenida Carlos Sanda", 699, 420, 111),
+            new CasillaCalle("Avenida Principal Guayabal", 1, 2, 3),
+            new CasillaSorpresa("Sorpresa #4", mazo),
+            new CasillaCalle("Avenida Don Julio Centeno", 1234, 4567, 7890),
+            new CasillaCalle("Avenida Este-Oeste 2", 2000, 1420, 3240)
         ));
         
         for(int i = 0; i < tokens.size(); i++)
@@ -79,17 +95,17 @@ public class CivitasJuego
         (
             /* 10 Cartas */
             /* 6 PAGARCOBRAR, 3 positivas y 3 negativas*/
-            new Sorpresa(TipoSorpresa.PAGARCOBRAR, "Consigues 10000€ de un banco sin consentimiento", 10000),
-            new Sorpresa(TipoSorpresa.PAGARCOBRAR, "Consigues 1000€ tirados en la calle", 1000),
-            new Sorpresa(TipoSorpresa.PAGARCOBRAR, "Te cae una moneda de 1€ del cielo", 1),
-            new Sorpresa(TipoSorpresa.PAGARCOBRAR, "Una moneda de 1€ se te va volando al cielo", -1),
-            new Sorpresa(TipoSorpresa.PAGARCOBRAR, "Ves todo rojo y pierdes 666€", -666),
-            new Sorpresa(TipoSorpresa.PAGARCOBRAR, "Alguien te pide sin consentimiento 10000€", -10000),
+            new SorpresaPagarCobrar("Consigues 10000€ de un banco sin consentimiento", 10000),
+            new SorpresaPagarCobrar("Consigues 1000€ tirados en la calle", 1000),
+            new SorpresaPagarCobrar("Te cae una moneda de 1€ del cielo", 1),
+            new SorpresaPagarCobrar("Una moneda de 1€ se te va volando al cielo", -1),
+            new SorpresaPagarCobrar("Ves todo rojo y pierdes 666€", -666),
+            new SorpresaPagarCobrar("Alguien te pide sin consentimiento 10000€", -10000),
             /* 4 PORCASAHOTEL, 2 positivas y 2 negativas */
-            new Sorpresa(TipoSorpresa.PORCASAHOTEL, "Cobra por cada casa y hotel 200€", 200),
-            new Sorpresa(TipoSorpresa.PORCASAHOTEL, "Cobra por cada casa y hotel 1000€", 1000),
-            new Sorpresa(TipoSorpresa.PORCASAHOTEL, "Paga por cada casa y hotel 420€", -420),
-            new Sorpresa(TipoSorpresa.PORCASAHOTEL, "Paga por cada casa y hotel 1000€", -1000)
+            new SorpresaPorCasaHotel("Cobra por cada casa y hotel 200€", 200),
+            new SorpresaPorCasaHotel("Cobra por cada casa y hotel 1000€", 1000),
+            new SorpresaPorCasaHotel("Paga por cada casa y hotel 420€", -420),
+            new SorpresaPorCasaHotel("Paga por cada casa y hotel 1000€", -1000)
         ));
         
         for(int i = 0; i < surpList.size(); i++)
@@ -108,7 +124,7 @@ public class CivitasJuego
      * ! Metodo no en UML, pero se necesita para la vista: el jugador debe de poder indicar en que calle quiere gestionar propiedades.
      * @return Lista de Casillas que son propiedad del jugador actual.
      */
-    public ArrayList<Casilla> getPropiedadesJugadorAct()
+    public ArrayList<CasillaCalle> getPropiedadesJugadorAct()
     {
         return this.jugadores.get(this.indiceJugadorActual).getPropiedades();
     }
