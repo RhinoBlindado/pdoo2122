@@ -41,6 +41,7 @@ public class JugadorPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         basedField = new javax.swing.JTextField();
         propiedadesPanel = new javax.swing.JPanel();
+        propiedadPanel2 = new GUI.PropiedadPanel();
 
         jLabel1.setText("Nombre:");
         jLabel1.setToolTipText("");
@@ -69,6 +70,7 @@ public class JugadorPanel extends javax.swing.JPanel {
         });
         add(basedField);
         add(propiedadesPanel);
+        add(propiedadPanel2);
     }// </editor-fold>//GEN-END:initComponents
 
     private void basedFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_basedFieldActionPerformed
@@ -109,6 +111,7 @@ public class JugadorPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField moneyField;
     private javax.swing.JTextField nameField;
+    private GUI.PropiedadPanel propiedadPanel2;
     private javax.swing.JPanel propiedadesPanel;
     // End of variables declaration//GEN-END:variables
 }

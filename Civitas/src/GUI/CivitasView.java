@@ -5,10 +5,15 @@
  */
 package GUI;
 
+import civitas.Casilla;
+import civitas.CasillaCalle;
 import civitas.CivitasJuego;
+import civitas.Diario;
+import civitas.Jugador;
 import civitas.OperacionInmobiliaria;
 import civitas.OperacionJuego;
 import controladorCivitas.Respuesta;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,41 +43,293 @@ public class CivitasView extends javax.swing.JFrame implements Vista
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        nextOp = new javax.swing.JTextField();
+        rankingLabel = new javax.swing.JLabel();
+        scrollpane = new javax.swing.JScrollPane();
+        rankingText = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        casName = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        casOwner = new javax.swing.JTextField();
+        casHouses = new javax.swing.JTextField();
+        casHotels = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        casCost = new javax.swing.JTextField();
+        casRent = new javax.swing.JTextField();
         jugadorPanel1 = new GUI.JugadorPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Civitas");
+        setMinimumSize(new java.awt.Dimension(1024, 768));
+        setPreferredSize(new java.awt.Dimension(1024, 768));
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
+        jLabel1.setText("Civitas");
+
+        nextOp.setEditable(false);
+        nextOp.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        rankingLabel.setText("Ranking:");
+
+        rankingText.setEditable(false);
+        rankingText.setColumns(20);
+        rankingText.setRows(5);
+        scrollpane.setViewportView(rankingText);
+
+        jLabel2.setText("Casilla actual:");
+
+        casName.setEditable(false);
+        casName.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        casName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                casNameActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Siguiente acción:");
+
+        jLabel4.setText("Propietario:");
+
+        jLabel5.setText("Nº Casas:");
+
+        jLabel6.setText("Nº Hoteles:");
+
+        casOwner.setEditable(false);
+        casOwner.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        casOwner.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                casOwnerActionPerformed(evt);
+            }
+        });
+
+        casHouses.setEditable(false);
+        casHouses.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        casHouses.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                casHousesActionPerformed(evt);
+            }
+        });
+
+        casHotels.setEditable(false);
+        casHotels.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        casHotels.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                casHotelsActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Precio:");
+
+        jLabel9.setText("Alquiler base:");
+
+        casCost.setEditable(false);
+        casCost.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        casCost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                casCostActionPerformed(evt);
+            }
+        });
+
+        casRent.setEditable(false);
+        casRent.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        casRent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                casRentActionPerformed(evt);
+            }
+        });
+
+        jugadorPanel1.setMaximumSize(new java.awt.Dimension(768, 32767));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(169, 169, 169)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jugadorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(nextOp, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel4)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(casOwner, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(casName, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(32, 32, 32)
+                                .addComponent(casHouses, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(casHotels, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(casCost, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(casRent, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(88, 88, 88))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jugadorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1004, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rankingLabel)
+                    .addComponent(scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(107, 107, 107)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(casHouses, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8)
+                            .addComponent(casCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(casHotels, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9)
+                            .addComponent(casRent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(casOwner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(nextOp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel2)
+                                .addComponent(casName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)))
+                .addGap(53, 53, 53)
                 .addComponent(jugadorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 139, Short.MAX_VALUE))
+                .addGap(118, 118, 118)
+                .addComponent(rankingLabel)
+                .addGap(18, 18, 18)
+                .addComponent(scrollpane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(69, Short.MAX_VALUE))
         );
+
+        rankingLabel.getAccessibleContext().setAccessibleName("¡Fin del Juego!\\nRanking:");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void casNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_casNameActionPerformed
+
+    private void casOwnerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casOwnerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_casOwnerActionPerformed
+
+    private void casHousesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casHousesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_casHousesActionPerformed
+
+    private void casHotelsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casHotelsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_casHotelsActionPerformed
+
+    private void casCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casCostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_casCostActionPerformed
+
+    private void casRentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_casRentActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_casRentActionPerformed
+
     @Override
     public void actualiza() 
     {
-        this.jugadorPanel1.setJugador(juego.getJugadorActual());
+       this.jugadorPanel1.setJugador(juego.getJugadorActual());
+        
+        Casilla actCas = juego.getCasillaActual();
+                
+        this.casName.setText(actCas.getNombre());
+        this.casOwner.setText(actCas.getPropietario());
+        
+        if(actCas.getNumCasas() < 0 )
+        {
+            this.casHouses.setText("N/A");
+        }
+        else
+        {
+            this.casHouses.setText(String.valueOf(actCas.getNumCasas()));
+        }
+        
+        if(actCas.getNumHoteles() < 0)
+        {
+            this.casHotels.setText("N/A");
+        }
+        else
+        {
+            this.casHotels.setText(String.valueOf(actCas.getNumHoteles()));
+        }
+        
+        if(actCas.getPrecioCompra() < 0)
+        {
+            this.casCost.setText("N/A");
+        }
+        else
+        {
+            this.casCost.setText(String.valueOf(actCas.getPrecioCompra()));
+        }
+        
+        
+        if(actCas.getPrecioAlquilerBase() < 0)
+        {
+            this.casRent.setText("N/A");
+        }
+        else
+        {
+            this.casRent.setText(String.valueOf(actCas.getPrecioAlquilerBase()));
+        }
+        
+        //this.casillaInfo.setText(juego.getCasillaActual().toString());
+        this.rankingLabel.setVisible(false);
+        this.rankingText.setVisible(false);
+        
+        
+        if(juego.finalDelJuego())
+        {
+        
+            this.rankingText.setText(juego.getRanking());
+            
+            this.rankingLabel.setText("¡Fin del juego! Ranking:");
+            this.rankingLabel.setVisible(true);
+            this.rankingText.setVisible(true);
+            
+            repaint();
+            revalidate();
+        }
     }
 
     @Override
@@ -87,28 +344,61 @@ public class CivitasView extends javax.swing.JFrame implements Vista
     }
 
     @Override
-    public Respuesta comprar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Respuesta comprar() 
+    {
+        int opcion= 1-JOptionPane.showConfirmDialog(null, "¿Quieres comprar la calle actual?", "Compra", JOptionPane.YES_NO_OPTION);
+        
+        return Respuesta.values()[opcion];
     }
 
     @Override
-    public OperacionInmobiliaria elegirOperacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public OperacionInmobiliaria elegirOperacion() 
+    {
+        GestionarDialog gest = new GestionarDialog(this);
+        return OperacionInmobiliaria.values()[gest.getGestion()];
     }
 
     @Override
-    public int elegirPropiedad() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int elegirPropiedad() 
+    {
+        Jugador player = this.juego.getJugadorActual();
+        ArrayList<CasillaCalle> properties = this.juego.getPropiedadesJugadorAct();
+        String title = ">>>¿Que propiedad quieres gestionar?";
+        ArrayList<String> ansTitle = new ArrayList<>();
+
+        for (int i=0; i<properties.size(); i++) 
+        {
+            ansTitle.add(properties.get(i).getNombre());
+        }
+
+        PropiedadDialog prop = new PropiedadDialog(this, ansTitle);
+        
+        return prop.getPropiedad();
+
     }
 
     @Override
-    public void mostrarSiguienteOperacion(OperacionJuego operación) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void mostrarSiguienteOperacion(OperacionJuego operación) 
+    {
+        nextOp.setText(operación.toString());
+        if(operación == OperacionJuego.AVANZAR)
+        {
+            Dado.createInstance(this);
+            Dado.getInstance().tirar();
+        }
+        
+        repaint();
+        revalidate();
+
     }
 
     @Override
-    public void mostrarEventos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void mostrarEventos() 
+    {
+        if(!Diario.getInstance().getEventos().isEmpty())
+        {
+            DiarioDialog diarioD = new DiarioDialog(this);
+        }
     }
 
     /**
@@ -123,7 +413,24 @@ public class CivitasView extends javax.swing.JFrame implements Vista
    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField casCost;
+    private javax.swing.JTextField casHotels;
+    private javax.swing.JTextField casHouses;
+    private javax.swing.JTextField casName;
+    private javax.swing.JTextField casOwner;
+    private javax.swing.JTextField casRent;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private GUI.JugadorPanel jugadorPanel1;
+    private javax.swing.JTextField nextOp;
+    private javax.swing.JLabel rankingLabel;
+    private javax.swing.JTextArea rankingText;
+    private javax.swing.JScrollPane scrollpane;
     // End of variables declaration//GEN-END:variables
 }

@@ -62,7 +62,7 @@ public class CivitasJuego
         ArrayList<Casilla> tokens = new ArrayList<>(Arrays.asList
         (
                                          // Nombre, Precio Compra, Edificar, Alquiler
-            new CasillaCalle("Avenida Andrés Eloy Blanco", 400, 250, 999),
+            new CasillaCalle("Avenida Andrés Eloy Blanco", 400, 250, 9999),
             new CasillaCalle("Avenida San José de Tarbes", 6000, 666, 777),
             new CasillaSorpresa("Sorpresa #1", mazo),
             new CasillaCalle("Avenida Salvador Feo La Cruz", 192, 1010, 1212),
@@ -93,7 +93,7 @@ public class CivitasJuego
     {
         ArrayList<Sorpresa> surpList = new ArrayList<>(Arrays.asList
         (
-            /* 10 Cartas */
+            /* 14 Cartas */
             /* 6 PAGARCOBRAR, 3 positivas y 3 negativas*/
             new SorpresaPagarCobrar("Consigues 10000€ de un banco sin consentimiento", 10000),
             new SorpresaPagarCobrar("Consigues 1000€ tirados en la calle", 1000),
@@ -105,7 +105,12 @@ public class CivitasJuego
             new SorpresaPorCasaHotel("Cobra por cada casa y hotel 200€", 200),
             new SorpresaPorCasaHotel("Cobra por cada casa y hotel 1000€", 1000),
             new SorpresaPorCasaHotel("Paga por cada casa y hotel 420€", -420),
-            new SorpresaPorCasaHotel("Paga por cada casa y hotel 1000€", -1000)
+            new SorpresaPorCasaHotel("Paga por cada casa y hotel 1000€", -1000),
+            /* 4 CONVERTIRME*/
+            new SorpresaConvertirme("¡Me convierto en especulador!", 0),
+            new SorpresaConvertirme("¡Me convierto en especulador!", 0),
+            new SorpresaConvertirme("¡Me convierto en especulador!", 0),
+            new SorpresaConvertirme("¡Me convierto en especulador!", 0)
         ));
         
         for(int i = 0; i < surpList.size(); i++)
@@ -193,6 +198,20 @@ public class CivitasJuego
     {
         Collections.sort(this.jugadores);
         return this.jugadores;
+    }
+    
+    public String getRanking()
+    {
+        String retString = "";
+        if(this.finalDelJuego())
+        {        
+            for(int i=0; i<this.jugadores.size(); i++)
+            {
+                retString += ("#"+(i+1)+" "+jugadores.get(i).getNombre()+"\n");
+            }
+        }
+        
+        return retString;
     }
     
     private void contabilizarPasosPorSalida(Jugador jugadorActual)

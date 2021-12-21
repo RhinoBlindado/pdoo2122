@@ -58,7 +58,8 @@ public class CasillaCalle extends Casilla
      * Obtener el precio de comprar la casilla.
      * @return  Flotante con dicho precio.
      */
-    float getPrecioCompra()
+    @Override
+    public float getPrecioCompra()
     {
         return this.precioCompra;
     }
@@ -67,7 +68,8 @@ public class CasillaCalle extends Casilla
      * Obtener el precio de edificar la casilla.
      * @return  Flotante con dicho precio.
      */
-    float getPrecioEdificar()
+    @Override
+    public float getPrecioEdificar()
     {
         return this.precioEdificar;
     }
@@ -76,7 +78,8 @@ public class CasillaCalle extends Casilla
      * Obtener el número de casas que hay en la casilla.
      * @return Número de casas.
      */
-    int getNumCasas()
+    @Override
+    public int getNumCasas()
     {
         return this.numCasas;
     }
@@ -85,9 +88,20 @@ public class CasillaCalle extends Casilla
      * Obtener el número de hoteles que hay en la casilla.
      * @return Número de casas.
      */
-    int getNumHoteles()
+    @Override
+    public int getNumHoteles()
     {
         return this.numHoteles;
+    }
+    
+    
+    @Override
+    public String getPropietario()
+    {
+        if(this.propietario != null)
+            return this.propietario.nombre;
+        else
+            return "N/A";
     }
     
     /**
@@ -97,6 +111,12 @@ public class CasillaCalle extends Casilla
     float getPrecioAlquilerCompleto()
     {
         return (FACTORALQUILERCALLE * this.precioBaseAlquiler) * (FACTORALQUILERCASA + numCasas + (numHoteles * FACTORALQUILERHOTEL));
+    }
+    
+    @Override
+    public float getPrecioAlquilerBase()
+    {
+        return this.precioBaseAlquiler;
     }
     
     /**
@@ -246,5 +266,10 @@ public class CasillaCalle extends Casilla
     void actualizaPropietarioPorConversion(JugadorEspeculador especulador)
     {
         this.propietario = especulador;
+    }
+    
+    public String getNombre()
+    {
+        return this.Nombre;
     }
 }

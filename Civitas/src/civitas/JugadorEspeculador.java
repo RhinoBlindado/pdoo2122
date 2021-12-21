@@ -10,6 +10,10 @@ public class JugadorEspeculador extends Jugador
     private static int factorEspeculador = 2;
     
     /* Métodos */
+    /**
+     * Constructor por copia
+     * @param otro Jugador a convertir a especulador.
+     */
     protected JugadorEspeculador(Jugador otro) 
     {
         super(otro);
@@ -41,6 +45,7 @@ public class JugadorEspeculador extends Jugador
     }
     
     /**
+     * Obtener cantidad maxima de casas.
      * @return  Retorna la cantidad máxima de casas.
      */
     @Override
@@ -51,6 +56,7 @@ public class JugadorEspeculador extends Jugador
     
     
     /**
+     * Obtener cantidad maxima de hoteles.
      * @return Retorna la cantidad máxima de hoteles.
      */
     @Override
@@ -59,6 +65,15 @@ public class JugadorEspeculador extends Jugador
         return super.getHotelesMax() * factorEspeculador;
     }
     
-    
-    
+    @Override
+    JugadorEspeculador convertir()
+    {
+        return null;
+    }
+   
+    @Override
+    public String getEspeculador() 
+    {
+        return "Verdadero";
+    }
 }

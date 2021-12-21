@@ -27,11 +27,40 @@ public class Casilla
     /** [?] No aparece en UML; ¿se borra?
      * @return Nombre de la casilla.
      */
-    String getNombre()
+    public String getNombre()
     {
         return this.Nombre;
     }
     
+    public String getPropietario()
+    {
+        return "N/A";
+    }
+    
+    public int getNumCasas()
+    {
+        return -1;
+    }
+    
+    public int getNumHoteles()
+    {
+        return -1;
+    }
+    
+    public float getPrecioCompra()
+    {
+        return -1;
+    }
+    
+    public float getPrecioEdificar()
+    {
+        return -1;
+    }
+
+    public float  getPrecioAlquilerBase()
+    {
+        return -1;
+    }    
     
     /**
      * @brief Informa al diario del jugador que ha caido en la casilla actual.

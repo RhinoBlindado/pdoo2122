@@ -259,7 +259,7 @@ public class Jugador implements Comparable<Jugador>
     /**
      * @return Retorna el nombre del Jugador.
      */
-    protected String getNombre()
+    public String getNombre()
     {
         return this.nombre;
     }
@@ -276,7 +276,7 @@ public class Jugador implements Comparable<Jugador>
     /**
      * @return Devuelve la lista de propiedades del Jugador.
      */
-    ArrayList<CasillaCalle> getPropiedades()
+    public ArrayList<CasillaCalle> getPropiedades()
     {
         return this.propiedades;
     }
@@ -294,7 +294,7 @@ public class Jugador implements Comparable<Jugador>
      * 
      * @return 
      */
-    protected float getSaldo()
+    public float getSaldo()
     {
         return this.saldo;
     }
@@ -450,13 +450,19 @@ public class Jugador implements Comparable<Jugador>
         else
             canBuy = "No";
         
-        return ("Jugador: "+this.nombre+", Casilla actual: "+this.casillaActual+", ¿Puede intentar comprar? "+ canBuy +", Saldo: "+this.saldo+"€");
+        return ("Jugador\n\tNombre: "+this.nombre+"\n\tCasilla actual: "+this.casillaActual+"\n\t¿Puede intentar comprar? "+ canBuy +"\n\tSaldo: "+this.saldo+"€"+
+                "\n\tNº Propiedades: "+this.propiedades.size());
     }
     
     
     JugadorEspeculador convertir()
     {
         return new JugadorEspeculador(this);
+    }
+
+    public String getEspeculador() 
+    {
+        return "Falso";
     }
 }
     

@@ -23,8 +23,8 @@ public class JuegoTexto
 
         CivitasJuego civitas = new CivitasJuego(players, false);
         VistaTextual frontend = new VistaTextual(civitas);
-        Controlador gameMaster = new Controlador(civitas, frontend);
-        gameMaster.juega();
+    //    Controlador gameMaster = new Controlador(civitas, frontend);
+    //    gameMaster.juega();
     }
 
 }
