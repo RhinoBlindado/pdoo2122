@@ -9,6 +9,14 @@ import controlador.Controlador;
 import java.util.ArrayList;
 import modelo.Modelo;
 
+/**
+ * Ejercicio 1.2:
+ * - A lo borde se le añade el biselado hundido.
+ * - Se realiza otro borde con una colección adicional de elementos, también
+ * tiene el borde hundido y no se le pueden quitar los elementos.
+ * 
+ * @author valentino
+ */
 
 public class VistaPrincipal extends javax.swing.JFrame implements Vista {
 
@@ -43,7 +51,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements Vista {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        vistaColeccion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        vistaColeccion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         numero.setText("0");
 
@@ -61,7 +69,7 @@ public class VistaPrincipal extends javax.swing.JFrame implements Vista {
             }
         });
 
-        segundaVista.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        segundaVista.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         numero1.setText("0");
 

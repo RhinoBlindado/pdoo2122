@@ -5,6 +5,13 @@
  */
 package vista;
 
+/**
+ * Ejercicio 1.1:
+ *  - El número está centrado, no está en la etiqueta, está con alineación
+ * horizontal centrada y es editable.
+ * - No se especifica si debe de guardarse la edición del número.
+ * @author valentino
+ */
 
 public class VistaElemento extends javax.swing.JPanel {
 
@@ -32,7 +39,6 @@ public class VistaElemento extends javax.swing.JPanel {
 
         numero.setText("jLabel1");
 
-        jTextField1.setEditable(false);
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
